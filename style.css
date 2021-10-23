@@ -1,0 +1,23 @@
+.header {
+    background-color: lightgray;
+    text-align: center;
+}
+
+.libraryContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: tomato;
+}
+
+.book {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 15vh;
+    height: 120px;
+    background-color: lightcoral;
+    margin: 5px;
+}
