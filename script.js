@@ -55,16 +55,31 @@ function refreshLibraryDisplay() {
             pages.classList.add('card-pages');
             // add ' pgs' after pages value if it isn't falsy
             (element.pages) ? (pages.innerText = element.pages + ' pgs') : (pages.innerText = element.pages);
+        const readIndicator = document.createElement('div');
+            readIndicator.classList.add('read-indicator');
+            if (element.hasRead) {
+                readIndicator.innerText = 'read';
+            } else {
+                readIndicator.innerText = 'not read'
+            }
+        // associate each element with respective book in array
+        const book = myLibrary[myLibrary.indexOf(element)];
+        if (!book.hasRead) card.style.backgroundColor = 'lightgray';
+        card.addEventListener('click', () => {
+            toggleReadStatus(book)
+            refreshLibraryDisplay();
+        });
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(pages);
+        card.appendChild(readIndicator);
         libraryContainer.appendChild(card);
     });
 }
 
-// function toggleReadStatus(book) {
-//     book.hasRead === true ? false : true;
-// }
+function toggleReadStatus(book) {
+    book.hasRead === true ? book.hasRead = false : book.hasRead = true;
+}
 
 // open, close, and submit modal
 addBtn.addEventListener('click', () => modal.style.display = 'block');
