@@ -39,13 +39,13 @@
         margin-top: 10px;
     }
 
-.book {
+.card {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 15vh;
+    width: 90px;
     height: 120px;
     background-color: lightcoral;
     margin: 5px;

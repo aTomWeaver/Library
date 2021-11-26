@@ -27,6 +27,11 @@ function addBookToLibrary() {
     const newAuthor = document.getElementById('new-author').value;
     const newPages = document.getElementById('new-pages').value;
     const newReadStatus = document.getElementById('new-read-status').checked;
+    if (!newTitle || !newAuthor) {
+        alert('Title and Author required'); 
+        clearModal();
+        return modal.style.display = 'block';
+    }
     const newBook = new Book(newTitle, newAuthor, newPages, newReadStatus);
     myLibrary.push(newBook);
     clearModal();
@@ -37,16 +42,29 @@ function refreshLibraryDisplay() {
     // loop through library array and display the books
     libraryContainer.innerHTML = '';
     return myLibrary.forEach((element) => {
-        const container = document.createElement('div');
-        container.classList.add('book');
-        container.innerText = `${element.title}\n${element.author}\n${element.pages}\n${element.hasRead}`;
-        libraryContainer.appendChild(container);
+        // individual divs for each value to make styling easier
+        const card = document.createElement('div'); 
+            card.classList.add('card');
+        const title = document.createElement('div'); 
+            title.classList.add('card-title');
+            title.textContent = element.title;
+        const author = document.createElement('div'); 
+            author.classList.add('card-author');
+            author.textContent = element.author;
+        const pages = document.createElement('div'); 
+            pages.classList.add('card-pages');
+            // add ' pgs' after pages value if it isn't falsy
+            (element.pages) ? (pages.innerText = element.pages + ' pgs') : (pages.innerText = element.pages);
+        card.appendChild(title);
+        card.appendChild(author);
+        card.appendChild(pages);
+        libraryContainer.appendChild(card);
     });
 }
 
-function toggleReadStatus(book) {
-    book.hasRead === true ? false : true;
-}
+// function toggleReadStatus(book) {
+//     book.hasRead === true ? false : true;
+// }
 
 // open, close, and submit modal
 addBtn.addEventListener('click', () => modal.style.display = 'block');
