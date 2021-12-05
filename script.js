@@ -4,13 +4,11 @@ const addBtn = document.getElementById('add-btn');
 let myLibrary = [];
 
 function Book(title, author, pages) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
+    return {title, author, pages}
 }
 
 function addBookToLibrary() {
-    const userBook = new Book(prompt('Title: '), prompt('Author: '), prompt('Pages: '));
+    userBook = Book(title, author, pages);
     myLibrary.push(userBook);
     displayBooks();
 }
@@ -21,13 +19,19 @@ function displayBooks() {
     return myLibrary.forEach((element) => {
         const container = document.createElement('div');
         container.classList.add('book');
-        container.innerText = `${element.title}\n${element.author}\n${element.pages}`;
+        container.innerHTML = `<span class="title">${element.title}</span>
+            <span class="author">${element.author}</span><span></span>
+            <span class="pages">${element.pages} pgs</span>`;
         libraryContainer.appendChild(container);
     });
 }
 
-function toggleReadStatus(book) {
-    book.hasRead === true ? false : true;
-}
+ function createBook() {
+     form.style.display = true; 
+ }
+
+// function toggleReadStatus(book) {
+//     book.hasRead === true ? false : true;
+// }
 
 addBtn.addEventListener('click', addBookToLibrary);

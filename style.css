@@ -1,23 +1,41 @@
 .header {
+    display: flex;
+    flex-direction: column;
     background-color: lightgray;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: small;
+    padding: 5px;
 }
 
 .libraryContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    align-items: flex-start;
     background-color: tomato;
 }
 
 .book {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
     text-align: center;
-    width: 15vh;
-    height: 120px;
+    width: 12vh;
+    height: 18vh;
     background-color: lightcoral;
     margin: 5px;
+    font-size: 10px;
+    border-radius: 4px;
+}
+
+.author {
+    font-size: 11px;
+}
+.title {
+    font-size: 14px;
+    font-weight: 600;
+}
+.pages {
+    font-size: 8px;
 }
