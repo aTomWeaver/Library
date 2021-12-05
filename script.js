@@ -45,6 +45,8 @@ function refreshLibraryDisplay() {
         // individual divs for each value to make styling easier
         const card = document.createElement('div'); 
             card.classList.add('card');
+        const deleteBtn = document.createElement('div');
+            deleteBtn.innerText = '×'
         const title = document.createElement('div'); 
             title.classList.add('card-title');
             title.textContent = element.title;
@@ -69,6 +71,7 @@ function refreshLibraryDisplay() {
             toggleReadStatus(book)
             refreshLibraryDisplay();
         });
+        card.appendChild(deleteBtn);
         card.appendChild(title);
         card.appendChild(author);
         card.appendChild(pages);
