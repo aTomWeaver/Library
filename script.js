@@ -22,7 +22,7 @@ function clearModal() {
     modal.style.display = 'none'
 }
 
-function addBookToLibrary() {
+function getFormInput() {
     const newTitle = document.getElementById('new-title').value;
     const newAuthor = document.getElementById('new-author').value;
     const newPages = document.getElementById('new-pages').value;
@@ -32,7 +32,11 @@ function addBookToLibrary() {
         clearModal();
         return modal.style.display = 'block';
     }
-    const newBook = new Book(newTitle, newAuthor, newPages, newReadStatus);
+    return new Book(newTitle, newAuthor, newPages, newReadStatus);
+}
+
+function addBookToLibrary() {
+    const newBook = getFormInput();
     myLibrary.push(newBook);
     clearModal();
     refreshLibraryDisplay();
@@ -45,8 +49,10 @@ function refreshLibraryDisplay() {
         // individual divs for each value to make styling easier
         const card = document.createElement('div'); 
             card.classList.add('card');
+            // card.dataset.cardNumber = myLibrary.indexOf(element);
         const deleteBtn = document.createElement('div');
-            deleteBtn.innerText = '×'
+            deleteBtn.innerText = '×';
+            deleteBtn.classList.add('delete-btn');
         const title = document.createElement('div'); 
             title.classList.add('card-title');
             title.textContent = element.title;
@@ -68,20 +74,17 @@ function refreshLibraryDisplay() {
         const book = myLibrary[myLibrary.indexOf(element)];
         if (!book.hasRead) card.style.backgroundColor = 'lightgray';
         card.addEventListener('click', () => {
-            toggleReadStatus(book)
+            book.hasRead === true ? book.hasRead = false : book.hasRead = true;
             refreshLibraryDisplay();
         });
-        card.appendChild(deleteBtn);
-        card.appendChild(title);
-        card.appendChild(author);
-        card.appendChild(pages);
-        card.appendChild(readIndicator);
+        deleteBtn.addEventListener('click', (e) => {
+            console.log(e.target.closest('.card'));
+            myLibrary.splice(myLibrary.indexOf(element), 1)
+            refreshLibraryDisplay();
+        });
+        card.append(deleteBtn, title, author, pages, readIndicator);
         libraryContainer.appendChild(card);
     });
-}
-
-function toggleReadStatus(book) {
-    book.hasRead === true ? book.hasRead = false : book.hasRead = true;
 }
 
 // open, close, and submit modal
